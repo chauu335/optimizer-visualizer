@@ -1,1 +1,1 @@
-web: npm run serve
+web: npm ci --production=false && npm run build && npm run serve
