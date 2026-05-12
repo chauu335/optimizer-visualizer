@@ -123,4 +123,4 @@ MIT - See [LICENSE](LICENSE) for details
 
 ## Author
 
-Created for STAT 413 Final Project
+Duc Hoang Chau Ngo
