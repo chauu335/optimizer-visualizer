@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "npm install --include=dev && react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false NODE_OPTIONS=--max-old-space-size=2048 npm install --include=dev && react-scripts build",
     "serve": "serve -s build",
     "heroku-postbuild": "npm run build",
     "test": "react-scripts test",
