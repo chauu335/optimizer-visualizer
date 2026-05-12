@@ -1,6 +1,9 @@
 [build]
 builder = "RAILPACK"
+buildCommand = "GENERATE_SOURCEMAP=false NODE_OPTIONS=--max-old-space-size=2048 npm install --include=dev && react-scripts build"
 
 [deploy]
 startCommand = "node scripts/start.js"
 healthcheckPath = "/"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
