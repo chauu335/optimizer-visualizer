@@ -90,7 +90,7 @@ export const optimizerInfo: Record<string, { name: string; description: string; 
   Adagrad: {
     name: 'Adagrad',
     description:
-      'Adaptive Gradient Descent. Scales learning rates by historical gradient magnitudes per parameter.',
+      'Adaptive Gradient Descent. Adagrad adapts the learning rate for each parameter by accumulating the sum of squared gradients over time. This means parameters that receive infrequent updates get larger steps, while frequently updated parameters slow down.',
     advantages: [
       'Good for sparse data',
       'Handles varying feature scales',
@@ -100,7 +100,7 @@ export const optimizerInfo: Record<string, { name: string; description: string; 
   RMSProp: {
     name: 'RMSProp',
     description:
-      'Root Mean Square Propagation. Uses exponential moving average of squared gradients to normalize updates.',
+      'Root Mean Square Propagation. RMSProp improves on Adagrad by using an exponential moving average of squared gradients, rather than a cumulative sum. This prevents the learning rate from decaying too quickly.',
     advantages: [
       'Prevents learning rate collapse',
       'Good for non-stationary problems',
@@ -110,7 +110,7 @@ export const optimizerInfo: Record<string, { name: string; description: string; 
   Adam: {
     name: 'Adam',
     description:
-      'Adaptive Moment Estimation. Combines momentum and RMSProp with bias correction.',
+      'Adaptive Moment Estimation. Adam combines the ideas of momentum (averaging past gradients) and RMSProp (adaptive learning rates). It keeps track of both the mean and variance of gradients, with bias correction.',
     advantages: [
       'Fast convergence',
       'Robust across many problems',
