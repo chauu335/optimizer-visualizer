@@ -5,6 +5,7 @@ import { PlaybackControls } from "./PlaybackControls";
 import { ResultsRankings } from "./ResultsRankings";
 import { FilterControls } from "./FilterControls";
 import { OptimizerInfoPanel } from "./OptimizerInfoPanel";
+import DatasetVisualizer from "./DatasetVisualizer";
 
 /**
  * Main dashboard component that orchestrates the visualization
@@ -169,6 +170,11 @@ export function Dashboard() {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Dataset Visualization */}
+        <div className="mb-8">
+          <DatasetVisualizer />
         </div>
 
         {/* Results Rankings */}

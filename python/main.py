@@ -235,6 +235,31 @@ def main():
         json.dump(output_data, f, indent=2)
     
     print(f"   Results saved to {output_file}")
+    
+    # Also export dataset for visualization (first 2 features + labels)
+    print("\n3b. Exporting dataset for visualization...")
+    dataset_data = {
+        'points': [
+            {
+                'x': float(X[i, 0]),
+                'y': float(X[i, 1]),
+                'label': int(y[i])
+            }
+            for i in range(len(X))
+        ],
+        'metadata': {
+            'total_samples': len(X),
+            'features_shown': 'First 2 of 50 features',
+            'classes': [-1, 1],
+            'class_labels': {'-1': 'Class -1', '1': 'Class +1'}
+        }
+    }
+    
+    dataset_file = os.path.join(output_dir, 'dataset.json')
+    with open(dataset_file, 'w') as f:
+        json.dump(dataset_data, f, indent=2)
+    
+    print(f"   Dataset saved to {dataset_file}")
     print("\n" + "=" * 50)
     print(f"Pipeline complete! Generated {len(results)} experiments.")
     print(f"Results ready for React visualization in {output_dir}")
