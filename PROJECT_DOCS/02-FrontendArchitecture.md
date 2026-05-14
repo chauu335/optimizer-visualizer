@@ -10,7 +10,8 @@ The frontend is a React 19 + TypeScript single-page application (SPA) that loads
 App.tsx
 └── Dashboard.tsx (Main Orchestrator)
     ├── DatasetInfo (Static info about the dataset)
-    ├── resultsRanking.tsx (Table: ranking by best accuracy)
+    ├── DatasetVisualizer.tsx (2D scatter plot with resample)
+    ├── ResultsRanking.tsx (Table: ranking by best accuracy)
     ├── FilterControls.tsx (Dropdown filters for optimizer/kernel)
     ├── PlaybackControls.tsx (Play/Pause/Reset/Speed buttons)
     └── Results Grid (6 LearningCurveChart instances side-by-side)
@@ -46,10 +47,11 @@ useEffect(() => {
 **Layout Order:**
 
 1. Dataset Info
-2. Results Rankings Table
-3. Filter Controls
-4. **Playback Controls** (moved here for UX)
-5. Learning Curve Charts Grid
+2. Dataset Visualizer (scatter plot)
+3. Results Rankings Table
+4. Filter Controls
+5. **Playback Controls** (moved here for UX)
+6. Learning Curve Charts Grid
 
 ### 2. LearningCurveChart.tsx
 
@@ -77,7 +79,30 @@ const data = currentEpoch
 - Training Time (total time to train all 100 epochs)
 - Convergence (when accuracy plateaus, estimated)
 
-### 3. FilterControls.tsx
+### 3. DatasetVisualizer.tsx
+
+**Purpose:** Visualize the raw training data as a 2D scatter plot
+
+**Key Features:**
+- Displays first 2 features of the 500-sample dataset
+- Random sampling with slider (50-500 points) to avoid clutter
+- **Resample button:** Generate new random subset instantly without reloading
+- Points colored by class (red = Class -1, blue = Class +1)
+- Loading state while fetching dataset.json
+
+**Key Props/State:**
+```typescript
+const [allPoints, setAllPoints] = useState<DataPoint[]>([]);
+const [sampledPoints, setSampledPoints] = useState<SampledPoint[]>([]);
+const [sampleSize, setSampleSize] = useState(250); // Start with 250 of 500
+```
+
+**Why Place It Here:**
+- Gives context: "What data are we training on?"
+- Explains why kernels matter: visually shows data isn't linearly separable
+- Users can explore different random samples without reloading the app
+
+### 4. FilterControls.tsx
 
 **Purpose:** Multi-select dropdowns for optimizer and kernel type
 
@@ -88,7 +113,7 @@ const data = currentEpoch
 
 **Effect:** Re-renders the 6-chart grid to show only selected combinations
 
-### 4. PlaybackControls.tsx
+### 5. PlaybackControls.tsx
 
 **Purpose:** Animation playback UI
 
@@ -100,7 +125,7 @@ const data = currentEpoch
 
 **Current Epoch Display:** Shows "Epoch: 45 / 100" in real-time
 
-## Data Flow
+### 6. LearningCurveChart.tsx
 
 ```
 results.json (static file)

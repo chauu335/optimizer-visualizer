@@ -54,6 +54,20 @@ The epoch counter increments every 50ms via `setInterval`, and users control it 
 
 ---
 
+## Q3b: Dataset Visualization
+
+**Question:** "I notice you have a scatter plot showing data points. Why did you add that?"
+
+**Answer:**
+"I added the scatter plot because just showing final optimizer results doesn't tell the complete story. Users might wonder: 'Why does RBF outperform linear?' The scatter plot immediately answers that—it visualizes the first 2 features and shows the data isn't linearly separable, so nonlinear kernels are necessary. It's a quick intuitive check.
+
+I also included a **resample feature** with a slider so users can see different random subsets without reloading the page. This keeps the visualization lightweight (showing only ~250 of 500 points by default) but lets users explore if they want more data."
+
+**Potential follow-up:** "What does the color coding mean?"
+- "Red points are Class -1, blue are Class +1. The color lets users quickly see how class-imbalanced or overlapping the data is. In this case, there's moderate overlap, which is why optimizers need to work hard to find a good decision boundary."
+
+---
+
 ## Q4: Data Architecture
 
 **Question:** "How does data flow from Python to the React frontend?"

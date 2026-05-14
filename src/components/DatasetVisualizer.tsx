@@ -1,6 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { RotateCcw } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { RotateCcw } from "lucide-react";
 
 interface DataPoint {
   x: number;
@@ -33,7 +42,7 @@ const DatasetVisualizer: React.FC = () => {
   useEffect(() => {
     const loadDataset = async () => {
       try {
-        const response = await fetch('/data/dataset.json');
+        const response = await fetch("/data/dataset.json");
         const data: DatasetData = await response.json();
         setAllPoints(data.points);
         setMetadata(data.metadata);
@@ -41,7 +50,7 @@ const DatasetVisualizer: React.FC = () => {
         generateSample(data.points, 250);
         setLoading(false);
       } catch (error) {
-        console.error('Failed to load dataset:', error);
+        console.error("Failed to load dataset:", error);
         setLoading(false);
       }
     };
@@ -83,7 +92,9 @@ const DatasetVisualizer: React.FC = () => {
     <div className="w-full bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
       {/* Header */}
       <div className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-2">Dataset Visualization</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-2">
+          Dataset Visualization
+        </h2>
         <p className="text-sm text-gray-600">
           {metadata.features_shown} • Total samples: {metadata.total_samples}
         </p>
@@ -92,7 +103,10 @@ const DatasetVisualizer: React.FC = () => {
       {/* Controls */}
       <div className="flex flex-wrap gap-4 items-center mb-6 pb-4 border-b border-gray-200">
         <div className="flex items-center gap-3">
-          <label htmlFor="sampleSize" className="text-sm font-medium text-gray-700">
+          <label
+            htmlFor="sampleSize"
+            className="text-sm font-medium text-gray-700"
+          >
             Show:
           </label>
           <input
@@ -112,7 +126,8 @@ const DatasetVisualizer: React.FC = () => {
 
         <button
           onClick={handleResample}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors text-sm font-medium"
+          className="flex items-center gap-2 px-4 py-2 text-white rounded-md transition-colors text-sm font-medium"
+          style={{ backgroundColor: "var(--color-clay)" }}
         >
           <RotateCcw size={16} />
           Resample
@@ -126,15 +141,25 @@ const DatasetVisualizer: React.FC = () => {
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
             <XAxis
               dataKey="x"
-              label={{ value: 'Feature 1', position: 'insideBottomRight', offset: -5 }}
+              label={{
+                value: "Feature 1",
+                position: "insideBottomRight",
+                offset: -5,
+              }}
               tick={{ fontSize: 12 }}
             />
             <YAxis
               dataKey="y"
-              label={{ value: 'Feature 2', angle: -90, position: 'insideLeft' }}
+              label={{ value: "Feature 2", angle: -90, position: "insideLeft" }}
               tick={{ fontSize: 12 }}
             />
-            <Tooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: '#fff', border: '1px solid #ccc' }} />
+            <Tooltip
+              cursor={{ strokeDasharray: "3 3" }}
+              contentStyle={{
+                backgroundColor: "#fff",
+                border: "1px solid #ccc",
+              }}
+            />
             <Legend />
 
             {/* Class -1 (negative class) */}

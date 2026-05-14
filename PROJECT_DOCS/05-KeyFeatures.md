@@ -1,6 +1,33 @@
 # Key Features & User Interactions
 
-## Feature 1: Animated Learning Curves
+## Feature 1: Dataset Visualization (2D Scatter Plot)
+
+**What:** Explore the raw training data interactively.
+
+**How It Works:**
+- Displays the first 2 features of all 500 samples
+- Slider lets you show/hide points (50-500 range)
+- **Resample button** generates a new random sample without reloading
+- Color-coded by class: red (Class -1) vs. blue (Class +1)
+
+**User Interaction:**
+```
+[Show: ___slider___ 250]  [↻ Resample]
+        ↓
+Scatter Plot: 250 random points visible
+Click Resample → new 250 random points (instant)
+Drag slider → update count, generate new sample
+```
+
+**Why Useful:**
+- **Context:** Understand what data the optimizers were trained on
+- **Intuition:** See why nonlinear kernels (RBF, Poly) matter—data isn't linearly separable
+- **Exploration:** Sample different subsets without page reload
+- **Interview value:** "I didn't just train a model—I visualized the data to understand it"
+
+---
+
+## Feature 2: Animated Learning Curves
 
 **What:** Watch validation accuracy grow in real-time as epochs play.
 
@@ -29,7 +56,7 @@ Charts update with 45 data points visible
 
 ---
 
-## Feature 2: Optimizer & Kernel Filtering
+## Feature 3: Optimizer & Kernel Filtering
 
 **What:** Show only the combinations you want to compare.
 
@@ -53,7 +80,7 @@ SGD+Linear, SGD+RBF, Adam+Linear, Adam+RBF, Adagrad+Linear, Adagrad+RBF
 
 ---
 
-## Feature 3: Results Ranking Table
+## Feature 4: Results Ranking Table
 
 **What:** Sorted table of all 12 results by best validation accuracy.
 
@@ -80,7 +107,7 @@ SGD+Linear, SGD+RBF, Adam+Linear, Adam+RBF, Adagrad+Linear, Adagrad+RBF
 
 ---
 
-## Feature 4: Real-Time Metrics Display
+## Feature 5: Real-Time Metrics Display
 
 **On Each Chart:**
 
@@ -104,7 +131,7 @@ SGD+Linear, SGD+RBF, Adam+Linear, Adam+RBF, Adagrad+Linear, Adagrad+RBF
 
 ---
 
-## Feature 5: Playback Controls
+## Feature 6: Playback Controls
 
 **Buttons & Controls:**
 
@@ -137,7 +164,7 @@ Updates in real-time during playback.
 
 ---
 
-## Feature 6: Dataset Information Panel
+## Feature 7: Dataset Information Panel
 
 **Displays:**
 
@@ -157,7 +184,7 @@ Dataset: Synthetic 2D Classification
 
 ---
 
-## Feature 7: Responsive Layout
+## Feature 8: Responsive Layout
 
 **Desktop (1920x1080):**
 
@@ -190,7 +217,7 @@ Dataset: Synthetic 2D Classification
 
 ---
 
-## Feature 8: No Real-Time Computation
+## Feature 9: No Real-Time Computation
 
 **Design Choice:** All results pre-computed in Python.
 
@@ -214,6 +241,10 @@ Dataset: Synthetic 2D Classification
 ### Animation
 
 "The challenge was making the curve appear to 'grow' during playback. We solved it by slicing the data progressively (data.slice(0, currentEpoch)) rather than using Recharts' built-in animation. This gave us full control over speed and pause behavior."
+
+### Dataset Visualization
+
+"Before visualizing the optimizer results, I added a scatter plot to help users understand the training data. The 2D projection shows that the data isn't linearly separable, which immediately explains why RBF and polynomial kernels should outperform linear—it's a nice intuitive hook when explaining the project."
 
 ### Filtering
 
