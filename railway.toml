@@ -1,6 +1,6 @@
 [build]
 builder = "RAILPACK"
-buildCommand = "GENERATE_SOURCEMAP=false NODE_OPTIONS=--max-old-space-size=2048 npm install --include=dev && react-scripts build"
+buildCommand = "npm run build"
 
 [deploy]
 startCommand = "node scripts/start.js"
